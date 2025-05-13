@@ -21,7 +21,7 @@ code :-
 class Solution{
 
     public:
-    int f(int ind,vector<int> &ds,int s,int k,vector<int>& nums,int n)
+    int f(int ind,int s,int k,vector<int>& nums,int n)
     {
         if(ind == n){
             if(s == k) {
@@ -31,23 +31,22 @@ class Solution{
             else return 0;
         }
 
-        ds.push_back(nums[ind]);
+        
         s = s + nums[ind];
 
-        int l = f(ind+1,ds,s,k,nums,n);
+        int l = f(ind+1,s,k,nums,n);
 
         s = s - nums[ind];
-        ds.pop_back();
-
-        int r = f(ind+1,ds,s,k,nums,n);
+        
+        int r = f(ind+1,s,k,nums,n);
 
         return l + r;
     }
     int countSubsequenceWithTargetSum(vector<int>& nums, int k){
     	
         int n = nums.size();
-        vector<int> ds;
-        return f(0,ds,0,k,nums,n);
+       
+        return f(0,0,k,nums,n);
 
         return 0;
     }
